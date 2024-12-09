@@ -7,18 +7,14 @@ class SudokuSolver:
         self.subgrid_size = 3
 
     def is_valid(self, row, col, num):
-        """Check if placing 'num' at board[row][col] is valid."""
-        # Check row
         for c in range(self.size):
             if self.board[row][c] == num:
                 return False
 
-        # Check column
         for r in range(self.size):
             if self.board[r][col] == num:
                 return False
 
-        # Check subgrid
         start_row = (row // self.subgrid_size) * self.subgrid_size
         start_col = (col // self.subgrid_size) * self.subgrid_size
         for r in range(start_row, start_row + self.subgrid_size):
@@ -29,7 +25,6 @@ class SudokuSolver:
         return True
 
     def find_empty_cell(self):
-        """Find the first empty cell on the board."""
         for r in range(self.size):
             for c in range(self.size):
                 if self.board[r][c] == 0:
@@ -37,12 +32,9 @@ class SudokuSolver:
         return None
 
     def heuristic(self):
-        """Calculate the heuristic: count the number of empty cells."""
         return sum(row.count(0) for row in self.board)
 
     def a_star_search(self):
-        """Solve Sudoku using A* algorithm."""
-        # Priority queue for A* (f = g + h)
         pq = []
         heapq.heappush(pq, (self.heuristic(), self.board))
 
@@ -50,33 +42,28 @@ class SudokuSolver:
             _, current_board = heapq.heappop(pq)
             self.board = current_board
 
-            # If no empty cells, the board is solved
             if self.heuristic() == 0:
                 return True
 
-            # Find the next empty cell
             empty_cell = self.find_empty_cell()
             if not empty_cell:
                 continue
 
             row, col = empty_cell
 
-            # Try all possible numbers (1-9)
             for num in range(1, 10):
                 if self.is_valid(row, col, num):
-                    # Place the number and calculate heuristic
                     new_board = [row[:] for row in self.board]
                     new_board[row][col] = num
                     heapq.heappush(pq, (self.heuristic(), new_board))
 
         return False
 
-    def print_board(self):
-        """Print the Sudoku board."""
+    def print_board(self):  
         for row in self.board:
             print(" ".join(str(num) if num != 0 else '.' for num in row))
 
-# Example Sudoku puzzle (0 represents empty cells)
+# (0 represents empty cells)
 puzzle = [
     [5, 3, 0, 0, 7, 0, 0, 0, 0],
     [6, 0, 0, 1, 9, 5, 0, 0, 0],
@@ -94,7 +81,7 @@ print("Sudoku Puzzle:")
 solver.print_board()
 
 if solver.a_star_search():
-    print("\nSolved Sudoku:")
+    print("\nSolution:")
     solver.print_board()
 else:
-    print("\nNo solution exists.")
+    print("\nNo solution.")
