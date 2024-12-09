@@ -1,10 +1,10 @@
 # Sudoku Solver Using A* Algorithm
 
-This project is a Sudoku solver implemented in Python using the **A\*** search algorithm. It intelligently fills in the empty cells of a Sudoku puzzle while adhering to the game's constraints.
+This project is a Sudoku solver implemented in Python using the A\* search algorithm. It fills the empty cells in a Sudoku puzzle while following the game's rules.
 
 ## Problem Description
 
-**Sudoku** is a 9x9 grid-based puzzle where the goal is to fill all cells with numbers from 1 to 9 such that:  
+Sudoku is a 9x9 grid-based puzzle where the goal is to fill all cells with numbers from 1 to 9 such that:  
 1. Each row contains numbers from 1 to 9 exactly once.  
 2. Each column contains numbers from 1 to 9 exactly once.  
 3. Each 3x3 subgrid contains numbers from 1 to 9 exactly once.  
@@ -17,7 +17,7 @@ A solved 9x9 matrix where all empty cells are filled while following the Sudoku 
 
 ## Algorithm
 
-The solver uses the **A\*** algorithm, which is a heuristic-based search method to find the optimal solution. The following are the key components:  
+The solver uses the A\* algorithm, which is a heuristic-based search method to find the optimal solution. The following are the key components:  
 
 1. **State Representation:**  
    - Each state represents a partially filled Sudoku grid.  
